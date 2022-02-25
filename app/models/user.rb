@@ -16,10 +16,10 @@ class User < ApplicationRecord
   end
 
   with_options presence: true do
-    validates :last_name_kana, format: { with: /\A[ァ-ヶ]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶ]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
+    validates :last_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
+    validates :first_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
   end
   
-  has_many :items
-  has_many :orders
+  #has_many :items
+  #has_many :orders
 end
