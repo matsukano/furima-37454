@@ -62,11 +62,20 @@ RSpec.describe Item, type: :model do
         @item.price = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
+
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
       it '価格:半角数値のみ保存可能' do
         @item.price = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range", "Price is invalid. Input half-width characters")
+      end
+      it '出品者情報:必須' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end
