@@ -54,10 +54,30 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Phone number is not a number", "Phone number is out of setting range")
       end
+      it '電話番号:9桁以下では保存不可' do
+        @order_shipping_address.phone_number = '090123456'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is out of setting range")
+      end
+      it '電話番号:12桁以上では保存不可' do
+        @order_shipping_address.phone_number = '090123456789'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Phone number is out of setting range")
+      end
       it "token:必須" do
         @order_shipping_address.token = nil
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include()
+        expect(@order_shipping_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "item_id:必須" do
+        @order_shipping_address.item_id = ''
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it "user_id:必須" do
+        @order_shipping_address.user_id = ''
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
       end
     end
   end
