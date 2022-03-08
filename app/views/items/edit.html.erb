@@ -108,7 +108,6 @@ app/assets/stylesheets/items/new.css %>
       </div>
     </div>
 
-    <%# 注意書き %>
     <div class="caution">
       <p class="sentence">
         <a href="#">禁止されている出品、</a>
@@ -126,7 +125,7 @@ app/assets/stylesheets/items/new.css %>
         に同意したことになります。
       </p>
     </div>
-    <%# /注意書き %>
+
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
       <%=link_to 'もどる', item_path(@item.id), class:"back-btn" %>
