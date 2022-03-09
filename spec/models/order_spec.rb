@@ -16,12 +16,12 @@ RSpec.describe Order, type: :model do
       it "item_id:必須" do
         @order.item_id = ''
         @order.valid?
-        expect(@order.errors.full_messages).to include("Item must exist")
+        expect(@order.errors.full_messages).to include("商品情報を入力してください")
       end
       it "user_id:必須" do
         @order.user_id = ''
         @order.valid?
-        expect(@order.errors.full_messages).to include("User must exist")
+        expect(@order.errors.full_messages).to include("購入者情報を入力してください")
       end
     end
   end

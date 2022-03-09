@@ -11,13 +11,13 @@ class User < ApplicationRecord
   validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
 
   with_options presence: true do
-    validates :last_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, allow_blank: true, message: '全角文字を使用してください' }
-    validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, allow_blank: true, message: '全角文字を使用してください' }
+    validates :last_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, allow_blank: true, message: 'は全角文字を使用してください' }
+    validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, allow_blank: true, message: 'は全角文字を使用してください' }
   end
 
   with_options presence: true do
-    validates :last_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
-    validates :first_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: '全角カタカナを使用してください' }
+    validates :last_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: 'は全角カタカナを使用してください' }
+    validates :first_name_kana, format: { with: /\A[ァ-ヶー]+\z/, allow_blank: true, message: 'は全角カタカナを使用してください' }
   end
   
   has_many :items

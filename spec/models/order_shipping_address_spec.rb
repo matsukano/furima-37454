@@ -22,62 +22,67 @@ RSpec.describe OrderShippingAddress, type: :model do
       it '郵便番号:必須' do
         @order_shipping_address.postal_code = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("郵便番号を入力してください")
       end
       it '郵便番号:「3桁ハイフン4桁」の半角文字列のみ保存可能' do
         @order_shipping_address.postal_code = '1234567'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_shipping_address.errors.full_messages).to include("郵便番号はハイフンを含んだ半角数字で入力してください")
       end
       it '都道府県:必須' do
         @order_shipping_address.prefecture_id = 0
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("都道府県を入力してください")
       end
       it '市区町村:必須' do
         @order_shipping_address.municipality = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Municipality can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("市区町村を入力してください")
       end
       it '番地:必須' do
         @order_shipping_address.house_number = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("House number can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("番地を入力してください")
       end
       it '電話番号:必須' do
         @order_shipping_address.phone_number = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("電話番号を入力してください")
       end
-      it '電話番号:10桁以上11桁以内の半角数値のみ保存可能' do
-        @order_shipping_address.phone_number = '090-1234-5678'
+      it '電話番号:半角数値のみ保存可能' do
+        @order_shipping_address.phone_number = '０９０１２３４５６７８'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is not a number", "Phone number is out of setting range")
+        expect(@order_shipping_address.errors.full_messages).to include("電話番号は半角数字で入力してください")
+      end
+      it '電話番号:ハイフンを含むと保存不可' do
+        @order_shipping_address.phone_number = '090-123-456'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("電話番号はハイフンを含まず１０桁〜１１桁で入力してください")
       end
       it '電話番号:9桁以下では保存不可' do
         @order_shipping_address.phone_number = '090123456'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is out of setting range")
+        expect(@order_shipping_address.errors.full_messages).to include("電話番号はハイフンを含まず１０桁〜１１桁で入力してください")
       end
       it '電話番号:12桁以上では保存不可' do
         @order_shipping_address.phone_number = '090123456789'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is out of setting range")
+        expect(@order_shipping_address.errors.full_messages).to include("電話番号はハイフンを含まず１０桁〜１１桁で入力してください")
       end
       it "token:必須" do
         @order_shipping_address.token = nil
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Token can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("カード情報を入力してください")
       end
       it "item_id:必須" do
         @order_shipping_address.item_id = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Item can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("Itemを入力してください")
       end
       it "user_id:必須" do
         @order_shipping_address.user_id = ''
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
+        expect(@order_shipping_address.errors.full_messages).to include("Userを入力してください")
       end
     end
   end
